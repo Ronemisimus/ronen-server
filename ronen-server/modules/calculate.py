@@ -2,43 +2,7 @@ import json
 from flask import make_response, request
 from .global_strings import *
 
-#global_objects
-plus = lambda a,b: a+b
-minus = lambda a,b: a-b
-times = lambda a,b: a*b
-divide = lambda a,b: a//b
-pow = lambda a,b: a**b
-from math import factorial
-
-binary_operations = {
-    'plus':plus,
-    'minus':minus,
-    'times':times,
-    'divide':divide,
-    'pow':pow
-}
-binary_op = lambda s: s in binary_operations.keys()
-
-unary_operations = {
-    'abs':abs,
-    'fact':factorial
-}
-unary_op = lambda s: s in unary_operations.keys()
-
-op = lambda params: params[operation_str].lower()
-
 #functions
-def get_json(body:str):
-    result = ''
-    error = ''
-    params = []
-    response_code = 200
-    try:
-        params = json.loads(body)
-    except json.JSONDecodeError:
-        error=bad_json
-        response_code = 418
-    return result, error, response_code, params
 
 def test_params(error:str,response_code:int, params:dict):
     result = ''
