@@ -1,20 +1,6 @@
 import json
 from flask import make_response, request
-
-#strings
-operation_str = "operation"
-arguments_str = "arguments"
-
-#errors
-bad_json = "Error: body not in json format"
-negative_fact = "Error while performing operation Factorial: not supported for the negative number"
-bad_operation = "Error: unknown operation: "
-bad_keys = "Error: no 'operation' or 'arguments' json keys"
-missing_args = "Error: Not enough arguments to perform the operation "
-extra_args = "Error: Too many arguments to perform the operation "
-not_list = "Error: prameter arguments is not a list"
-bad_args_type = "Error: arguments is not a list of ints only"
-div_by_0 = "Error while performing operation Divide: division by 0"
+from .global_strings import *
 
 #global_objects
 plus = lambda a,b: a+b
@@ -110,7 +96,4 @@ def calculate_endpoint():
     result, error, response_code, params = get_json(request.get_data())
     result, error, response_code = test_params(error,response_code,params)
     result, error, response_code = use_params(error,response_code,params)
-    return make_response(json.dumps({
-        "result":result,
-        "error-message":error
-    }), response_code)
+    return make_response( to_json(result,error) , response_code)
