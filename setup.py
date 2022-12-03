@@ -10,5 +10,6 @@ setup(name="ronen-server",
     packages=["ronen-server"],
     install_requires=[
         'flask',
+        'waitress'
     ],
     zip_safe=False)
