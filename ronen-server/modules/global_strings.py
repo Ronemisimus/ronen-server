@@ -17,6 +17,8 @@ bad_args_type = "Error: arguments is not a list of ints only"
 div_by_0 = "Error while performing operation Divide: division by 0"
 missing_query = "Error: missing query parameter"
 missing_args_stack = lambda op,req_arg,cur_arg: f"Error: cannot implement operation {op}. It requires {req_arg} arguments and the stack has only {cur_arg} arguments"
+not_int = "Error: argument is not an int"
+too_many_remove = lambda remove, curr: f"Error: cannot remove {remove} from the stack. It has only {curr} arguments"
 
 #global_objects
 plus = lambda a,b: a+b

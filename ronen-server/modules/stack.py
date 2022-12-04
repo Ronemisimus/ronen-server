@@ -80,10 +80,39 @@ def do_operation(result,error:str,response_code:int,operation:str):
     return result, error, response_code
             
 
-
 def stack_operate_endpoint():
     params = request.args.to_dict()
     result, error, response_code, operation = get_operation(params)
     result, error, response_code = do_operation(result,error,response_code,operation)
+    return make_response(to_json(result,error),response_code)
+
+
+def get_amount(params:dict):
+    result = ''
+    error = ''
+    response_code = 200
+    amount = 0
+    
+    valid_keys = 'count' in params.keys()
+    valid_type = valid_keys and isinstance(params['count'],int)
+    valid_amount = valid_type and params['count']<=len(stack) and params['count']>=0
+    
+    response_code = response_code if valid_amount else 409
+
+    if not valid_keys:
+        error = missing_query
+    if not valid_type and valid_keys:
+        error = not_int
+    if not valid_amount and valid_type:
+        error = too_many_remove(params['count'],len(stack))
+    if valid_amount:
+        amount = params['count']
+    return result,error,response_code,amount
+
+def stack_delete_endpoint():
+    params = request.args.to_dict()
+    result, error, response_code, amount = get_amount(params)
+    if amount!=0:
+        stack = stack[:-amount]
     return make_response(to_json(result,error),response_code)
 
