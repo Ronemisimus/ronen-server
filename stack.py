@@ -1,4 +1,4 @@
-from .global_strings import *
+from global_strings import *
 from flask import request, make_response
 import json
 #global objects

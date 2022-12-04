@@ -1,4 +1,4 @@
-from .server import create_app
+from server import create_app
 from waitress import serve
 
 def start_server():
@@ -6,3 +6,7 @@ def start_server():
     port = 8496
     print('serving app on http://localhost:8496')
     serve(app,port=port)
+
+
+if __name__ == '__main__':
+    start_server()

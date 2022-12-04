@@ -1,6 +1,5 @@
-import json
 from flask import make_response, request
-from .global_strings import *
+from global_strings import *
 
 #functions
 

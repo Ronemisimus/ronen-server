@@ -1,6 +1,6 @@
 from flask import Flask
-from .modules.calculate import calculate_endpoint 
-from .modules.stack import stack_size_endpoint, stack_add_argument, stack_operate_endpoint, stack_delete_endpoint
+from calculate import calculate_endpoint 
+from stack import stack_size_endpoint, stack_add_argument, stack_operate_endpoint, stack_delete_endpoint
 
 
 def create_app():
