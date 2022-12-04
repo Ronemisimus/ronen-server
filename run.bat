@@ -1,4 +1,5 @@
 setlocal
-SET PATH=%~dp0\site-packages;%PATH%
-pip install --root=site-packages .
+SET PATH=%~dp0package-chace;%PATH%
+echo %PATH%
+pip install --target=package-chace .
 python -m ronen-server

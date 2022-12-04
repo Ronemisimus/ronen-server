@@ -1,6 +1,5 @@
 TEMPPATH=$PATH
-PATH="$(pwd)/site-packages;$PATH" 
-printf "%s\r\n\n" $PATH
-pip install --root=site-packages .
+PATH="$(pwd)/package-chace;$PATH"
+pip install --target=package-chace .
 python -m ronen-server
 PATH=$TEMPPATH
