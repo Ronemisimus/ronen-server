@@ -47,7 +47,7 @@ def get_operation(params:dict):
     valid_operation = valid_keys and ( unary_op(op(params)) or binary_op(op(params)) )
     valid_amount  = valid_operation and ( ( unary_op(op(params)) and len(stack)>0 ) or
         ( binary_op(op(params)) and len(stack)>1 ) )
-    required_args = 0 if valid_operation else 1 if unary_op(op(params)) else 2
+    required_args = 0 if not valid_operation else 1 if unary_op(op(params)) else 2
     current_args = len(stack)
     response_code = response_code if valid_keys and valid_operation and valid_amount else 409
     if not valid_keys:
@@ -94,8 +94,8 @@ def get_amount(params:dict):
     amount = 0
     
     valid_keys = 'count' in params.keys()
-    valid_type = valid_keys and isinstance(params['count'],int)
-    valid_amount = valid_type and params['count']<=len(stack) and params['count']>=0
+    valid_type = valid_keys and str(params['count']).isnumeric()
+    valid_amount = valid_type and int(params['count'])<=len(stack) and int(params['count'])>=0
     
     response_code = response_code if valid_amount else 409
 
@@ -106,13 +106,15 @@ def get_amount(params:dict):
     if not valid_amount and valid_type:
         error = too_many_remove(params['count'],len(stack))
     if valid_amount:
-        amount = params['count']
+        amount = int(params['count'])
     return result,error,response_code,amount
 
 def stack_delete_endpoint():
     params = request.args.to_dict()
     result, error, response_code, amount = get_amount(params)
     if amount!=0:
-        stack = stack[:-amount]
+        [stack.pop() for i in range(amount)]
+    if response_code==200:
+        result = len(stack)
     return make_response(to_json(result,error),response_code)
 
