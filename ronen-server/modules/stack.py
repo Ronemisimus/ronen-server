@@ -47,7 +47,7 @@ def get_operation(params:dict):
     valid_operation = valid_keys and ( unary_op(op(params)) or binary_op(op(params)) )
     valid_amount  = valid_operation and ( ( unary_op(op(params)) and len(stack)>0 ) or
         ( binary_op(op(params)) and len(stack)>1 ) )
-    required_args = 1 if unary_op(op(params)) else 2 if binary_op(op(params)) else 0
+    required_args = 0 if valid_operation else 1 if unary_op(op(params)) else 2
     current_args = len(stack)
     response_code = response_code if valid_keys and valid_operation and valid_amount else 409
     if not valid_keys:
