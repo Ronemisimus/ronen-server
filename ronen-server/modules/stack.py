@@ -64,18 +64,19 @@ def get_operation(params:dict):
 def do_operation(result,error:str,response_code:int,operation:str):
     if response_code==200:
         if unary_op(operation):
-            if operation == 'fact' and stack[-1]<0:
+            x=stack.pop()
+            if operation == 'fact' and x<0:
                 error = negative_fact
                 response_code = 409
             else:
-                result = unary_operations[operation](stack.pop())
+                result = unary_operations[operation](x)
         if binary_op(operation):
-            if operation == 'divide' and stack[-2]==0:
+            x=stack.pop()
+            y=stack.pop()
+            if operation == 'divide' and y==0:
                 error = div_by_0
                 response_code = 409
             else:
-                x=stack.pop()
-                y=stack.pop()
                 result = binary_operations[operation](x,y)
     return result, error, response_code
             
