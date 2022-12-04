@@ -49,7 +49,7 @@ def get_operation(params:dict):
         ( binary_op(op(params)) and len(stack)>1 ) )
     required_args = 0 if not valid_operation else 1 if unary_op(op(params)) else 2
     current_args = len(stack)
-    response_code = response_code if valid_keys and valid_operation and valid_amount else 409
+    response_code = response_code if valid_amount else 409
     if not valid_keys:
         error = missing_query
     if not valid_operation and valid_keys:
