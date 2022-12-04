@@ -1,1 +1,1 @@
-call ./build/nsis/server_1.0.exe
+python server.pyz

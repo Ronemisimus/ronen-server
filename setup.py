@@ -6,7 +6,6 @@ setup(
     description="Greet the world.",
     py_modules=["hello","server","calculate","stack","global_strings"],
     install_requires=['flask','waitress'],
-    packages=['ronen-server'],
     include_package_data=True,
     zip_safe=False,
     entry_points={
