@@ -46,8 +46,7 @@ unary_op = lambda s: s in unary_operations.keys()
 op = lambda params: params[operation_str].lower()
 
 to_json = lambda res,error: json.dumps({
-    result_str:res,
-    error_str:error
+    a:b for (a,b) in [(result_str,res) if res!='' else (error_str,error)]
 })
 
 def get_json(body:str):
