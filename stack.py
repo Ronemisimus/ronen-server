@@ -5,7 +5,7 @@ import json
 stack = []
 
 def stack_size_endpoint():
-    return make_response(to_json(res=str(len(stack)),error=''),200)
+    return make_response(to_json(res=len(stack),error=''),200)
 
 
 def get_arg_list(result:int, error:str, response_code:int, params:dict):
@@ -32,7 +32,7 @@ def stack_add_argument():
     result, error, response_code, arguments = get_arg_list(result,error,response_code,params)
     stack.extend(arguments)
     if response_code == 200:
-        result = str(len(stack))
+        result = len(stack)
     else:
         result = ''
     return make_response(to_json(result,error),response_code)
