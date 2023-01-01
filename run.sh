@@ -1,2 +1,2 @@
-shiv -c hello -o server.pyz .
+shiv -c main -o server.pyz .
 python server.pyz
