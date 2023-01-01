@@ -1,5 +1,6 @@
 from flask import make_response, request
 from global_strings import *
+from logs import log_request_at_start, log_request_at_end
 
 #functions
 
@@ -56,7 +57,9 @@ def use_params(error:str,response_code:int, params:dict):
 
 
 def calculate_endpoint():
+    mstime = log_request_at_start(request.path,request.method)
     result, error, response_code, params = get_json(request.get_data())
     result, error, response_code = test_params(error,response_code,params)
     result, error, response_code = use_params(error,response_code,params)
+    log_request_at_end(mstime)
     return make_response( to_json(result,error) , response_code)

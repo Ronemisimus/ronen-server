@@ -5,6 +5,8 @@ operation_str = "operation"
 arguments_str = "arguments"
 result_str="result"
 error_str="error-message"
+reqNumStr = 'requestNumber'
+
 #errors
 bad_json = "Error: body not in json format"
 negative_fact = "Error while performing operation Factorial: not supported for the negative number"
@@ -35,6 +37,7 @@ binary_operations = {
     'divide':divide,
     'pow':pow
 }
+
 binary_op = lambda s: s in binary_operations.keys()
 
 unary_operations = {
