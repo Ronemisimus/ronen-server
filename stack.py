@@ -1,11 +1,12 @@
 from global_strings import *
 from flask import request, make_response
-from logs import log_request_at_end, log_request_at_start
+from logs import log_request_at_end, log_request_at_start, log_stack_size,log_stack_add_args
 #global objects
 stack = []
 
 def stack_size_endpoint():
     mstime = log_request_at_start(request.path,request.method)
+    log_stack_size(len(stack),stack)
     log_request_at_end(mstime)
     return make_response(to_json(res=len(stack),error=''),200)
 
@@ -38,6 +39,7 @@ def stack_add_argument():
         result = len(stack)
     else:
         result = ''
+    log_stack_add_args(len(stack),len(arguments),arguments)
     log_request_at_end(mstime)
     return make_response(to_json(result,error),response_code)
 

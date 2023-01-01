@@ -15,3 +15,15 @@ def log_request_at_end(pref_count):
     mstime = perf_counter()-pref_count
     reqLogger = logging.getLogger('request')
     reqLogger.debug('request #%d duration: %dms',extra_dict[reqNumStr],int(mstime*1000),extra=extra_dict)
+
+def log_stack_size(size,stack):
+    stackLogger = logging.getLogger('stack')
+    stackLogger.info('Stack size is %d',size,extra=extra_dict)
+    stackLogger.debug('Stack content (first == top): %s', list(stack),extra=extra_dict)
+
+def log_stack_add_args(size,added,arglist):
+    stackLogger = logging.getLogger('stack')
+    stackLogger.info('Adding total of %d argument(s) to the stack | Stack size: %d',added,size,extra=extra_dict)
+    stackLogger.debug('Adding arguments: %s | Stack size before %d | stack size after %d', arglist, size-added, size, extra=extra_dict)
+
+
