@@ -14,4 +14,4 @@ def log_request_at_start(resource, verb):
 def log_request_at_end(pref_count):
     mstime = perf_counter()-pref_count
     reqLogger = logging.getLogger('request')
-    reqLogger.debug('request #%d duration: %dms',extra_dict[reqNumStr],mstime,extra=extra_dict)
+    reqLogger.debug('request #%d duration: %dms',extra_dict[reqNumStr],int(mstime*1000),extra=extra_dict)
