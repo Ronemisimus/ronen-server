@@ -1,10 +1,12 @@
 from global_strings import *
 from flask import request, make_response
-import json
+from logs import log_request_at_end, log_request_at_start
 #global objects
 stack = []
 
 def stack_size_endpoint():
+    mstime = log_request_at_start(request.path,request.method)
+    log_request_at_end(mstime)
     return make_response(to_json(res=len(stack),error=''),200)
 
 
@@ -28,6 +30,7 @@ def get_arg_list(result:int, error:str, response_code:int, params:dict):
 
 
 def stack_add_argument():
+    mstime = log_request_at_start(request.path,request.method)
     result, error, response_code, params = get_json(request.get_data())
     result, error, response_code, arguments = get_arg_list(result,error,response_code,params)
     stack.extend(arguments)
@@ -35,6 +38,7 @@ def stack_add_argument():
         result = len(stack)
     else:
         result = ''
+    log_request_at_end(mstime)
     return make_response(to_json(result,error),response_code)
 
 
@@ -111,11 +115,13 @@ def get_amount(params:dict):
     return result,error,response_code,amount
 
 def stack_delete_endpoint():
+    mstime = log_request_at_start(request.path,request.method)
     params = request.args.to_dict()
     result, error, response_code, amount = get_amount(params)
     if amount!=0:
         [stack.pop() for i in range(amount)]
     if response_code==200:
         result = len(stack)
+    log_request_at_end(mstime)
     return make_response(to_json(result,error),response_code)
 
