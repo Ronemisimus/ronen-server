@@ -1,6 +1,9 @@
 from global_strings import *
 from flask import request, make_response
-from logs import log_request_at_end, log_request_at_start, log_stack_size,log_stack_add_args,log_stack_operate,log_stack_delete
+from logs import log_request_at_end, \
+    log_request_at_start,  log_stack_size, \
+    log_stack_add_args,log_stack_operate, \
+    log_stack_delete, log_error
 #global objects
 stack = []
 
@@ -40,6 +43,7 @@ def stack_add_argument():
     else:
         result = ''
     log_stack_add_args(len(stack),len(arguments),arguments)
+    log_error(error)
     log_request_at_end(mstime)
     return make_response(to_json(result,error),response_code)
 
@@ -96,6 +100,7 @@ def stack_operate_endpoint():
     result, error, response_code, operation = get_operation(params)
     result, error, response_code, args = do_operation(result,error,response_code,operation)
     log_stack_operate(operation,result,len(stack),args)
+    log_error(error)
     log_request_at_end(msec)
     return make_response(to_json(result,error),response_code)
 
@@ -131,6 +136,7 @@ def stack_delete_endpoint():
     if response_code==200:
         result = len(stack)
     log_stack_delete(amount,len(stack))
+    log_error(error)
     log_request_at_end(mstime)
     return make_response(to_json(result,error),response_code)
 
