@@ -63,8 +63,8 @@ def calculate_endpoint():
     result, error, response_code = test_params(error,response_code,params)
     result, error, response_code = use_params(error,response_code,params)
     if response_code==200:
-        log_independent_operation(params[operation_str] if operation_str in params.keys() else '', 
-            params[arguments_str] if arguments_str in params else [], result)
+        log_independent_operation(params[operation_str], 
+            params[arguments_str], result)
     log_error(error,False)
     log_request_at_end(mstime)
     return make_response( to_json(result,error) , response_code)

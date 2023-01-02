@@ -100,7 +100,7 @@ def stack_operate_endpoint():
     result, error, response_code, operation = get_operation(params)
     result, error, response_code, args = do_operation(result,error,response_code,operation)
     if response_code==200:
-        log_stack_operate(operation,result,len(stack),args)
+        log_stack_operate(params[operation_str],result,len(stack),args)
     log_error(error,True)
     log_request_at_end(msec)
     return make_response(to_json(result,error),response_code)
