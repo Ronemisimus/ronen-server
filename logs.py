@@ -41,7 +41,7 @@ def log_error(error_message,is_stack):
         if is_stack:
             Logger = logging.getLogger('stack')
         else:
-            Logger = logging.getLogger('independet')
+            Logger = logging.getLogger('independent')
         Logger.error('Server encountered an error ! message: %s',error_message,extra=extra_dict)
 
 
