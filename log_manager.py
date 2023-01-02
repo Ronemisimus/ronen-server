@@ -5,10 +5,8 @@ import logging
 
 valid_levels = {
     'ERROR':logging.ERROR,
-    'WARN':logging.WARN,
     'INFO':logging.INFO,
-    'DEBUG':logging.DEBUG,
-    'CRITICAL':logging.CRITICAL
+    'DEBUG':logging.DEBUG
 }
 
 def get_logger_name(params:dict):
