@@ -4,7 +4,7 @@ setup(
     name="ronen-server",
     version="0.0.1",
     description="Greet the world.",
-    py_modules=["main","server","calculate","stack","global_strings","logs"],
+    py_modules=["main","server","calculate","stack","global_strings","logs","log_manager"],
     install_requires=['flask','waitress'],
     include_package_data=True,
     zip_safe=False,
