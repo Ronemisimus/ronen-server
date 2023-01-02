@@ -1,6 +1,6 @@
 from global_strings import *
 from flask import request, make_response
-from logs import log_request_at_end, log_request_at_start, log_stack_size,log_stack_add_args
+from logs import log_request_at_end, log_request_at_start, log_stack_size,log_stack_add_args,log_stack_operate,log_stack_delete
 #global objects
 stack = []
 
@@ -68,6 +68,7 @@ def get_operation(params:dict):
 
 
 def do_operation(result,error:str,response_code:int,operation:str):
+    args = []
     if response_code==200:
         if unary_op(operation):
             x=stack.pop()
@@ -76,6 +77,7 @@ def do_operation(result,error:str,response_code:int,operation:str):
                 response_code = 409
             else:
                 result = unary_operations[operation](x)
+            args.append(x)
         if binary_op(operation):
             x=stack.pop()
             y=stack.pop()
@@ -84,13 +86,17 @@ def do_operation(result,error:str,response_code:int,operation:str):
                 response_code = 409
             else:
                 result = binary_operations[operation](x,y)
-    return result, error, response_code
+            args.extend([y,x])
+    return result, error, response_code,args
             
 
 def stack_operate_endpoint():
+    msec = log_request_at_start(request.path,request.method)
     params = request.args.to_dict()
     result, error, response_code, operation = get_operation(params)
-    result, error, response_code = do_operation(result,error,response_code,operation)
+    result, error, response_code, args = do_operation(result,error,response_code,operation)
+    log_stack_operate(operation,result,len(stack),args)
+    log_request_at_end(msec)
     return make_response(to_json(result,error),response_code)
 
 
@@ -124,6 +130,7 @@ def stack_delete_endpoint():
         [stack.pop() for i in range(amount)]
     if response_code==200:
         result = len(stack)
+    log_stack_delete(amount,len(stack))
     log_request_at_end(mstime)
     return make_response(to_json(result,error),response_code)
 

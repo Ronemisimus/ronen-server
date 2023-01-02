@@ -27,3 +27,12 @@ def log_stack_add_args(size,added,arglist):
     stackLogger.debug('Adding arguments: %s | Stack size before %d | stack size after %d', arglist, size-added, size, extra=extra_dict)
 
 
+def log_stack_operate(op, res, size,args):
+    stackLogger = logging.getLogger('stack')
+    stackLogger.info('Performing operation %s. Result is %s | stack size: %d',op,str(res),size,extra=extra_dict)
+    stackLogger.debug('Performing operation: %s(%s) = %s', op, ','.join([str(a) for a in args]), str(res), extra=extra_dict)
+
+def log_stack_delete(removed,size):
+    stackLogger = logging.getLogger('stack')
+    stackLogger.info('Removing total %d argument(s) from the stack | Stack size: %d',removed,size,extra=extra_dict)
+
