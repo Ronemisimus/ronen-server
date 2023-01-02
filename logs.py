@@ -36,9 +36,12 @@ def log_stack_delete(removed,size):
     stackLogger = logging.getLogger('stack')
     stackLogger.info('Removing total %d argument(s) from the stack | Stack size: %d',removed,size,extra=extra_dict)
 
-def log_error(error_message):
+def log_error(error_message,is_stack):
     if error_message != '':
-        stackLogger = logging.getLogger('stack')
-        stackLogger.error('Server encountered an error ! message: %s',error_message,extra=extra_dict)
+        if is_stack:
+            Logger = logging.getLogger('stack')
+        else:
+            Logger = logging.getLogger('independet')
+        Logger.error('Server encountered an error ! message: %s',error_message,extra=extra_dict)
 
 
