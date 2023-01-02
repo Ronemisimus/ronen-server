@@ -45,3 +45,9 @@ def log_error(error_message,is_stack):
         Logger.error('Server encountered an error ! message: %s',error_message,extra=extra_dict)
 
 
+def log_independent_operation(op,args,res):
+    independentLogger = logging.getLogger('independent')
+    independentLogger.info('Performing operation %s. Result is %s',op,str(res),extra=extra_dict)
+    independentLogger.debug('Performing operation: %s(%s) = %s', op, ','.join([str(a) for a in args]), str(res), extra=extra_dict)
+
+
