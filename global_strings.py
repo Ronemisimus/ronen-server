@@ -21,6 +21,10 @@ missing_query = "Error: missing query parameter"
 missing_args_stack = lambda op,req_arg,cur_arg: f"Error: cannot implement operation {op}. It requires {req_arg} arguments and the stack has only {cur_arg} arguments"
 not_int = "Error: argument is not an int"
 too_many_remove = lambda remove, curr: f"Error: cannot remove {remove} from the stack. It has only {curr} arguments"
+no_logger_name = "Error: no query parameter matching logger-name was given"
+no_logger_level = "Error: no query parameter matching logger-level was given"
+logger_missing = lambda x: f"Error: no logger named {x}"
+invalid_level = lambda x: f"Error: invalid log level: {x}"
 
 #global_objects
 plus = lambda a,b: a+b
