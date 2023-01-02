@@ -23,8 +23,8 @@ def log_stack_size(size,stack):
 
 def log_stack_add_args(size,added,arglist):
     stackLogger = logging.getLogger('stack-logger')
-    stackLogger.info('Adding total of %d argument (s) to the stack | Stack size: %d',added,size,extra=extra_dict)
-    stackLogger.debug('Adding arguments: %s | Stack size before %d | stack size after %d', arglist, size-added, size, extra=extra_dict)
+    stackLogger.info('Adding total of %d argument(s) to the stack | Stack size: %d',added,size,extra=extra_dict)
+    stackLogger.debug('Adding arguments: %s | Stack size before %d | stack size after %d', ','.join([str(a) for a in arglist]), size-added, size, extra=extra_dict)
 
 
 def log_stack_operate(op, res, size,args):
@@ -34,7 +34,7 @@ def log_stack_operate(op, res, size,args):
 
 def log_stack_delete(removed,size):
     stackLogger = logging.getLogger('stack-logger')
-    stackLogger.info('Removing total %d argument (s) from the stack | Stack size: %d',removed,size,extra=extra_dict)
+    stackLogger.info('Removing total %d argument(s) from the stack | Stack size: %d',removed,size,extra=extra_dict)
 
 def log_error(error_message,is_stack):
     if error_message != '':

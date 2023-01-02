@@ -90,7 +90,7 @@ def do_operation(result,error:str,response_code:int,operation:str):
                 response_code = 409
             else:
                 result = binary_operations[operation](x,y)
-            args.extend([y,x])
+            args.extend([x,y])
     return result, error, response_code,args
             
 
