@@ -19,7 +19,7 @@ def log_request_at_end(pref_count):
 def log_stack_size(size,stack):
     stackLogger = logging.getLogger('stack-logger')
     stackLogger.info('Stack size is %d',size,extra=extra_dict)
-    stackLogger.debug('Stack content (first == top): %s', list(stack),extra=extra_dict)
+    stackLogger.debug('Stack content (first == top): %s', list(stack)[::-1],extra=extra_dict)
 
 def log_stack_add_args(size,added,arglist):
     stackLogger = logging.getLogger('stack-logger')

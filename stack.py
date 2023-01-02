@@ -40,9 +40,9 @@ def stack_add_argument():
     stack.extend(arguments)
     if response_code == 200:
         result = len(stack)
+        log_stack_add_args(len(stack),len(arguments),arguments)
     else:
         result = ''
-    log_stack_add_args(len(stack),len(arguments),arguments)
     log_error(error,True)
     log_request_at_end(mstime)
     return make_response(to_json(result,error),response_code)
@@ -99,7 +99,8 @@ def stack_operate_endpoint():
     params = request.args.to_dict()
     result, error, response_code, operation = get_operation(params)
     result, error, response_code, args = do_operation(result,error,response_code,operation)
-    log_stack_operate(operation,result,len(stack),args)
+    if response_code==200:
+        log_stack_operate(operation,result,len(stack),args)
     log_error(error,True)
     log_request_at_end(msec)
     return make_response(to_json(result,error),response_code)
@@ -135,7 +136,7 @@ def stack_delete_endpoint():
         [stack.pop() for i in range(amount)]
     if response_code==200:
         result = len(stack)
-    log_stack_delete(amount,len(stack))
+        log_stack_delete(amount,len(stack))
     log_error(error,True)
     log_request_at_end(mstime)
     return make_response(to_json(result,error),response_code)
