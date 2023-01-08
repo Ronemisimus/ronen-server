@@ -4,7 +4,7 @@ import logging
 import logging.config
 import os
 
-port = 9583
+port = 9285
 
 def start_server():
     if "logs" not in os.listdir(os.getcwd()):
